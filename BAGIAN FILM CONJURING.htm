@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Conjuring Universe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Jura:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Jura', sans-serif;
+            background-color: #0a0a0a;
+            color: #e6e6e6;
+            line-height: 1.6;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.8)), 
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230a0a0a"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%231a1a1a" stroke-width="1"/></svg>');
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #660000;
+            box-shadow: 0 5px 15px rgba(102, 0, 0, 0.3);
+        }
+        
+        .logo {
+            font-family: 'Creepster', cursive;
+            font-size: 2.5rem;
+            color: #cc0000;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+            letter-spacing: 2px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #e6e6e6;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s, text-shadow 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: #cc0000;
+            text-shadow: 0 0 10px rgba(204, 0, 0, 0.7);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #cc0000;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-family: 'Creepster', cursive;
+            font-size: 4.5rem;
+            color: #cc0000;
+            margin-bottom: 20px;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+            animation: flicker 5s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(204, 0, 0, 0.6);
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+                color: #660000;
+            }
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #cc0000;
+            color: #fff;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn:hover {
+            background-color: #990000;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+        }
+        
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: 'Creepster', cursive;
+            font-size: 2.8rem;
+            color: #cc0000;
+            text-align: center;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+        
+        .about-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .films-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .film-card {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .film-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(204, 0, 0, 0.3);
+        }
+        
+        .film-image {
+            height: 380px;
+            overflow: hidden;
+        }
+        
+        .film-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .film-card:hover .film-image img {
+            transform: scale(1.1);
+        }
+        
+        .film-info {
+            padding: 20px;
+        }
+        
+        .film-title {
+            font-size: 1.4rem;
+            color: #cc0000;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .film-year {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .film-desc {
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .characters {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .character-card {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(204, 0, 0, 0.3);
+        }
+        
+        .character-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 3px solid #660000;
+            box-shadow: 0 0 15px rgba(204, 0, 0, 0.3);
+        }
+        
+        .character-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .character-name {
+            font-size: 1.3rem;
+            color: #cc0000;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .character-desc {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        footer {
+            background-color: #0f0f0f;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #660000;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            color: #cc0000;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #999;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: #cc0000;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            color: #999;
+            font-size: 1.5rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: #cc0000;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        .trailer-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .trailer-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">THE CONJURING</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#films">Film</a></li>
+                <li><a href="#characters">Karakter</a></li>
+                <li><a href="#trailer">Trailer</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>THE CONJURING UNIVERSE</h1>
+            <p>Rasakan ketakutan yang nyata dalam seri film horor yang diangkat dari kisah nyata peneliti paranormal Ed dan Lorraine Warren.</p>
+            <a href="#films" class="btn">Jelajahi Film</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="section-title">Tentang The Conjuring</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>The Conjuring adalah waralaba media horor supernatural Amerika yang berpusat pada serial film yang diproduksi oleh New Line Cinema, DC Comics, dan Atomic Monster Productions. Serial ini menggambarkan pengalaman nyata dari pasangan suami istri Ed dan Lorraine Warren, yang menyelidiki peristiwa paranormal.</p>
+                <p>Film pertama dirilis pada tahun 2013 dan disutradarai oleh James Wan. Film ini mendapat pujian kritis dan kesuksesan komersial, menghasilkan beberapa sekuel dan film spin-off termasuk Annabelle, The Nun, dan The Curse of La Llorona.</p>
+                <p>Dunia The Conjuring telah menjadi salah satu waralaba horor dengan pendapatan tertinggi sepanjang masa, dengan total pendapatan lebih dari $2,1 miliar di seluruh dunia.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2020/08/Conjuring-1-2-and-Insidious-1-2.jpg" alt="Ed dan Lorraine Warren, pasangan peneliti paranormal dengan latar belakang gelap dan sentuhan aura misterius">
+            </div>
+        </div>
+    </section>
+
+    <!-- Films Section -->
+    <section id="films" class="section">
+        <h2 class="section-title">Film dalam Seri The Conjuring</h2>
+        <div class="films-grid">
+            <div class="film-card">
+                <div class="film-image">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.WrAQi6sfDRjoTPlrJa70QAHaJ4?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Poster film The Conjuring 2013 dengan gambar rumah berhantu dan siluet keluarga yang ketakutan">
+                </div>
+                <div class="film-info">
+                    <h3 class="film-title">The Conjuring</h3>
+                    <div class="film-year">2013</div>
+                    <p class="film-desc">Kisah horor nyata tentang keluarga Perron yang mengalami teror mengerikan di rumah pedesaan mereka yang baru.</p>
+                    <a href="file:///C:/Users/USER/OneDrive/Documents/WEB/web%20detail%20the%20conjuring%20season%201.html" class="btn">Go to film</a>
+                </div>
+            </div>
+            
+            <div class="film-card">
+                <div class="film-image">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.zf-bjZuEEyMcpMGjyeeXHQHaJ4?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Poster film The Conjuring 2 dengan gambar gadis kecil dan siluet roh jahat di belakangnya">
+                </div>
+                <div class="film-info">
+                    <h3 class="film-title">The Conjuring 2</h3>
+                    <div class="film-year">2016</div>
+                    <p class="film-desc">Ed dan Lorraine Warren melakukan perjalanan ke London untuk membantu seorang ibu dan keempat anaknya yang diteror oleh roh jahat.</p>
+                    <a href="#" class="btn">Detail</a>
+                </div>
+            </div>
+            
+            <div class="film-card">
+                <div class="film-image">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.3OhCXo07837n75_FS4UOjgHaJ4?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Poster film The Conjuring 3 dengan gambar setan dan simbol-simbol okultis">
+                </div>
+                <div class="film-info">
+                    <h3 class="film-title">The Conjuring: The Beyond</h3>
+                    <div class="film-year">2021</div>
+                    <p class="film-desc">Kasus Ed dan Lorraine Warren yang paling menantang.</p>
+                    <a href="#" class="btn">Detail</a>
+                </div>
+            </div>
+
+            <div>
+                    <p><a href='file:///C:/Users/USER/OneDrive/Documents/WEB/WEB%20BAGIAN%20UTAMA.html'>
+                    <button class="bg-primary text-dark px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-700 transition-colors">
+                    <i class="fas fa-play mr-2"></i>Balik ke menu utama</button>
+                </a>
+            </p>
+        </div>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spider-Man Films Universe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .spider-web {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .nav-spider {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #d90429;
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, rgba(217, 4, 41, 0.1), rgba(11, 19, 43, 0.8));
+        }
+        
+        .spider-swing {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: swing 4s ease-in-out infinite;
+        }
+        
+        @keyframes swing {
+            0%, 100% { transform: translateY(-50%) rotate(-5deg); }
+            50% { transform: translateY(-50%) rotate(5deg); }
+        }
+        
+        .spider-logo {
+            width: 60px;
+            height: 60px;
+            background: #d90429;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L2 7L12 12L22 7L12 2Z' style='fill:%23ffffff%3B'/%3E%3Cpath d='M2 17L12 22L22 17' style='fill:none%3Bstroke:%23ffffff%3Bstroke-width:2%3B'/%3E%3Cpath d='M2 12L12 17L22 12' style='fill:none%3Bstroke:%23ffffff%3Bstroke-width:2%3B'/%3E%3C/svg%3E") center/contain no-repeat;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L2 7L12 12L22 7L12 2Z' style='fill:%23ffffff%3B'/%3E%3Cpath d='M2 17L12 22L22 17' style='fill:none%3Bstroke:%23ffffff%3Bstroke-width:2%3B'/%3E%3Cpath d='M2 12L12 17L22 12' style='fill:none%3Bstroke:%23ffffff%3Bstroke-width:2%3B'/%3E%3C/svg%3E") center/contain no-repeat;
+        }
+        
+        .film-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .film-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(217, 4, 41, 0.3);
+            border-color: #d90429;
+        }
+        
+        .character-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .character-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        
+        .web-effect {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            width: 100px;
+            height: 2px;
+            animation: webShoot 1s ease-out forwards;
+        }
+        
+        @keyframes webShoot {
+            0% {
+                transform: scaleX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scaleX(1);
+                opacity: 0;
+            }
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid #d90429;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #d90429; }
+        }
+        
+        .spider-sense {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .mobile-only {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .spider-swing {
+                display: none;
+            }
+            
+            .mobile-only {
+                display: block;
+                width: 200px;
+                height: 300px;
+                margin: 2rem auto;
+                background: linear-gradient(45deg, #e63946, #d90429);
+                clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            }
+            
+            .hero-content {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="spider-web"></div>
+    
+    <!-- Navigation -->
+    <nav class="nav-spider fixed w-full z-50 py-4 px-6">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="spider-logo mr-3"></div>
+                <h1 class="text-2xl font-bold text-red-500">SPIDER-VERSE</h1>
+            </div>
+            
+            <div class="hidden md:flex space-x-6">
+                <a href="#films" class="hover:text-red-400 transition-colors">FILMS</a>
+                <a href="#characters" class="hover:text-red-400 transition-colors">CHARACTERS</a>
+                <a href="#villains" class="hover:text-red-400 transition-colors">VILLAINS</a>
+                <a href="#gallery" class="hover:text-red-400 transition-colors">GALLERY</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center justify-between">
+                <div class="hero-content lg:w-1/2">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 typewriter">SPIDER-MAN FILMS</h1>
+                    <p class="text-xl md:text-2xl text-gray-300 mb-8">
+                        Jelajahi dunia Spider-Man melalui semua film yang memukau. Dari Tobey Maguire hingga Tom Holland, saksikan evolusi pahlawan laba-laba favorit semua orang.
+                    </p>
+                    <div class="flex space-x-4">
+                        <button onclick="shootWeb()" class="bg-red-600 hover:bg-red-700 px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105">
+                            EXPLORE FILMS
+                        </button>
+                        <button onclick="playTrailer()" class="border-2 border-red-600 text-red-400 hover:bg-red-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all">
+                            WATCH TRAILER
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 relative">
+                    <div class="spider-swing">
+                        <img src="https://cdn.antaranews.com/cache/1200x800/2022/06/16/WhatsApp-Image-2022-06-16-at-8.58.30-AM.jpeg.webp" alt="Spider-Man dalam pose heroik dengan kostum merah dan biru berayun di antara gedung-gedung New York City" class="w-96 h-auto">
+                    </div>
+                    <div class="mobile-only"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Films Section -->
+    <section id="films" class="py-20 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16">SPIDER-MAN FILM SERIES</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Spider-Man 1 -->
+                <div class="film-card">
+                    <img src="https://play-lh.googleusercontent.com/tbGV3LbApT3dSANPQzFmjDbyhNMdfzttq6V1QcgaHFrxHK1FJow6Ujv2EMZ1PwGBU6ez=w240-h480-rw" alt="Poster film Spider-Man 2002 dengan Tobey Maguire sebagai Peter Parker melawan Green Goblin di atas jembatan" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Spider-Man (2002)</h3>
+                        <p class="text-gray-300 mb-4">Tobey Maguire sebagai Peter Parker menghadapi Green Goblin dalam film pertama trilogi Sam Raimi.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="bg-red-600 px-3 py-1 rounded text-sm">⭐ 7.3/10</span>
+                            <span class="text-yellow-400">Action</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spider-Man 2 -->
+                <div class="film-card">
+                    <img src="https://technicolordreams70.wordpress.com/files/2009/01/spider_man_two_ver2.jpg" alt="Spider-Man 2 dengan Doctor Octopus dan pertarungan epik di kereta api New York" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Spider-Man 2 (2004)</h3>
+                        <p class="text-gray-300 mb-4">Peter Parker menghadapi Doctor Octopus sambil berjuang dengan kehidupan pribadinya.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="bg-red-600 px-3 py-1 rounded text-sm">⭐ 7.4/10</span>
+                            <span class="text-yellow-400">Drama</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spider-Man 3 -->
+                <div class="film-card">
+                    <img src="https://i.pinimg.com/originals/f7/cc/39/f7cc3925de788a9489f069db480926d9.jpg" alt="Spider-Man 3 dengan Venom, Sandman, dan Harry Osborn sebagai New Goblin" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Spider-Man 3 (2007)</h3>
+                        <p class="text-gray-300 mb-4">Peter menghadapi tiga musuh sekaligus: Venom, Sandman, dan New Goblin.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="bg-red-600 px-3 py-1 rounded text-sm">⭐ 6.2/10</span>
+                            <span class="text-yellow-400">Action</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- The Amazing Spider-Man -->
+                <div class="film-card">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.a1CzD5KA61gdMhaR50sUBAHaLH?rs=1&pid=ImgDetMain&o=7&rm=3" alt="The Amazing Spider-Man dengan Andrew Garfield dan Emma Stone sebagai Gwen Stacy" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">The Amazing Spider-Man (2012)</h3>
+                        <p class="text-gray-300 mb-4">Andrew Garfield sebagai Peter Parker yang baru dengan kisah cinta bersama Gwen Stacy.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="bg-red-600 px-3 py-1 rounded text-sm">⭐ 6.9/10</span>
+                            <span class="text-yellow-400">Romance</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spider-Man: Homecoming -->
+                <div class="film-card">
+                    <img src="https://img00.deviantart.net/f932/i/2017/153/f/5/spiderman_homecoming_2017_poster_by_edaba7-dbbaj5z.jpg" alt="Spider-Man: Homecoming dengan Tom Holland dan Michael Keaton sebagai Vulture" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Homecoming (2017)</h3>
+                        <p class="text-gray-300 mb-4">Tom Holland sebagai Spider-Man muda yang belajar menjadi pahlawan dibawah bimbingan Iron Man.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="bg-red-600 px-3 py-1 rounded text-sm">⭐ 7.4/10</span>
+                            <span class="text-yellow-400">Adventure</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spider-Man: No Way Home -->
+                <div class="film-card">
+                    <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bb48ffc1-bf25-486b-a056-63c3bfce1223/debe70w-6b46c00e-5867-40ae-af7c-918d40bcc81a.jpg/v1/fill/w_1280,h_1897,q_75,strp/spider_man__spider_verse__2021__poster_by_bakikayaa_debe70w-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTg5NyIsInBhdGgiOiJcL2ZcL2JiNDhmZmMxLWJmMjUtNDg2Yi1hMDU2LTYzYzNiZmNlMTIyM1wvZGViZTcwdy02YjQ2YzAwZS01ODY3LTQwYWUtYWY3Yy05MThkNDBiY2M4MWEuanBnIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.PFMHxTD61nlG8DpkSdXwB6az9TzE3iSUBnwuaOGDzM0" alt="Spider-Man: No Way Home dengan tiga Spider-Man dari berbagai universe bersama-sama" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">No Way Home (2021)</h3>
+                        <p class="text-gray-300 mb-4">Pertemuan multiverse dengan tiga Spider-Man berbeda melawan musuh dari berbagai alam semesta.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="bg-red-600 px-3 py-1 rounded text-sm">⭐ 8.2/10</span>
+                            <span class="text-yellow-400">Multiverse</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Characters Section -->
+    <section id="characters" class="py-20 px-6 bg-black bg-opacity-30">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16">SPIDER-MEN CHARACTERS</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="character-card text-center">
+                    <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/11/tobey-maguire-spider-man-trilogy.jpg" alt="Tobey Maguire sebagai Spider-Man klasik dengan kostum merah dan biru tradisional" class="w-32 h-32 mx-auto mb-4 rounded-full object-cover">
+                    <h3 class="text-xl font-bold mb-2">Tobey Maguire</h3>
+                    <p class="text-gray-300">Spider-Man Trilogy (2002-2007)</p>
+                    <div class="mt-4 bg-red-600 px-3 py-1 rounded-full text-sm inline-block">
+                        Original Spider-Man
+                    </div>
+                </div>
+
+                <div class="character-card text-center">
+                    <img src="https://wallpapers.com/images/hd/andrew-garfield-spider-man-l58ocytplscjvad0.jpg" alt="Andrew Garfield sebagai The Amazing Spider-Man dengan gaya yang lebih modern" class="w-32 h-32 mx-auto mb-4 rounded-full object-cover">
+                    <h3 class="text-xl font-bold mb-2">Andrew Garfield</h3>
+                    <p class="text-gray-300">The Amazing Spider-Man (2012-2014)</p>
+                    <div class="mt-4 bg-blue-600 px-3 py-1 rounded-full text-sm inline-block">
+                        Amazing Spider-Man
+                    </div>
+                </div>
+
+                <div class="character-card text-center">
+                    <img src="https://deadline.com/wp-content/uploads/2023/06/tom-holland-spider-man-4.jpg" alt="Tom Holland sebagai Spider-Man MCU dengan kostum Iron Spider" class="w-32 h-32 mx-auto mb-4 rounded-full object-cover">
+                    <h3 class="text-xl font-bold mb-2">Tom Holland</h3>
+                    <p class="text-gray-300">MCU Spider-Man (2016-2021)</p>
+                    <div class="mt-4 bg-yellow-600 px-3 py-1 rounded-full text-sm inline-block">
+                        MCU Spider-Man
+                    </div>
+                </div>
+
+                <div class="character-card text-center">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.x6ZX83VkrhRnA3oW4Xi2qwHaHa?w=184&h=184&c=7&r=0&o=5&pid=1.7" alt="Zendaya sebagai MJ versi MCU dengan gaya street style dan enigmatic expression" class="w-32 h-32 mx-auto mb-4 rounded-full object-cover">
+                    <h3 class="text-xl font-bold mb-2">Zendaya</h3>
+                    <p class="text-gray-300">MJ in MCU Series</p>
+                    <div class="mt-4 bg-purple-600 px-3 py-1 rounded-full text-sm inline-block">
+                        Michelle Jones
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Villains Section -->
+    <section id="villains" class="py-20 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16">LEGENDARY VILLAINS</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="character-card">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.9_7fmLYyRbcQYUBYZpU7dAAAAA?w=157&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Green Goblin dengan kostum hijau dan topeng menakutkan terbang di atas glider" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-2xl font-bold text-green-400 mb-2">Green Goblin</h3>
+                    <p class="text-gray-300">Norman Osborn yang menjadi jahat setelah eksperimen serum. Musuh pertama Spider-Man dengan glider dan pumpkin bombs.</p>
+                </div>
+
+ <div>
+                    <p><a href='file:///C:/Users/USER/OneDrive/Documents/WEB/WEB%20BAGIAN%20UTAMA.html'>
+                    <button class="bg-primary text-dark px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-700 transition-colors">
+                    <i class="fas fa-play mr-2"></i>Balik ke menu utama</button>
+                </a>
+            </p>
+        </div>

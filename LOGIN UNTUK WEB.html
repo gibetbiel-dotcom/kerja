@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login dengan Google</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <h2>Login dengan Google</h2>
+
+  <div id="g_id_onload"
+       data-client_id="YOUR_CLIENT_ID.apps.googleusercontent.com"
+       data-callback="handleCredentialResponse"
+       data-auto_prompt="false">
+  </div>
+
+  <div class="g_id_signin" 
+       data-type="standard"
+       data-shape="rectangular"
+       data-theme="outline"
+       data-text="signin_with"
+       data-size="large"
+       data-logo_alignment="left">
+  </div>
+
+  <script>
+    function handleCredentialResponse(response) {
+      // response.credential adalah token JWT ID dari Google
+      console.log("Encoded JWT ID token: " + response.credential);
+
+      // Kamu bisa decode token ini di backend atau menggunakan library JWT di frontend
+      // Contoh decode sederhana (tidak aman untuk produksi):
+      const base64Url = response.credential.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+
+      const userObject = JSON.parse(jsonPayload);
+      console.log(userObject);
+
+      // Tampilkan nama user
+      document.body.insertAdjacentHTML('beforeend', `<p>Halo, ${userObject.name}!</p>`);
+    }
+  </script>
+</body>
+</html>

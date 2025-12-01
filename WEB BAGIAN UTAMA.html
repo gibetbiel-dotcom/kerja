@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cinemelati trengkap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#E50914',
+                        secondary: '#221F1F',
+                        accent: '#F5F5F1',
+                        dark: '#141414'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(0,0,0,0.7)), url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e226d5ec-33af-4032-90bd-47ffde803b73.png');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .movie-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .genre-tag {
+            transition: background-color 0.3s ease;
+        }
+        
+        .genre-tag:hover {
+            background-color: #b3252c;
+        }
+    </style>
+</head>
+<body class="bg-dark text-accent min-h-screen">
+    <!-- Header/Navbar -->
+    <nav class="bg-secondary bg-opacity-90 backdrop-blur-sm fixed w-full z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-film text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-white">Cinemelati</span>
+                </div>
+
+                <!-- Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="text-accent hover:text-primary transition-colors">Beranda</a>
+                    <a href="#" class="text-accent hover:text-primary transition-colors">Film</a>
+                    <a href="#" class="text-accent hover:text-primary transition-colors">Series</a>
+                    <a href="#" class="text-accent hover:text-primary transition-colors">Genre</a>
+                    <a href="#" class="text-accent hover:text-primary transition-colors">Tentang</a>
+                </div>
+
+                <!-- Search and User -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Cari film..." class="bg-gray-800 text-accent px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-primary w-40 md:w-64">
+                        <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                     <a href='file:///C:/Users/USER/OneDrive/Documents/WEB/LOGIN%20UNTUK%20WEB.html'>
+                    <button class="bg-primary text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors">
+                    Login
+                    </button></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center pt-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
+                Nikmati Pengalaman <span class="text-primary">Sinema</span> Terbaik
+            </h1>
+            <p class="text-xl md:text-2xl text-accent mb-8 max-w-3xl mx-auto">
+                Temukan ribuan film berkualitas tinggi dari berbagai genre. Streaming tanpa batas, kapan saja, di mana saja.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href='file:///C:/Users/USER/OneDrive/Documents/WEB/BAGIAN%20KLIK%20MULAI.html.'>
+                    <button class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-700 transition-colors">
+                        <i class="fas fa-play mr-2"></i>Mulai Menonton</button>
+                </a>
+
+                <button class="bg-white bg-opacity-20 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-opacity-30 transition-colors">
+                    <i class="fas fa-info-circle mr-2"></i>Info Selengkapnya
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Movies -->
+    <section class="py-20 bg-secondary">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-12">
+                <h2 class="text-3xl font-bold text-white">Film Pilihan Editor</h2>
+                <a href="#" class="text-primary hover:underline">Lihat Semua →</a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Movie Card 1 -->
+                <div class="movie-card bg-gray-800 rounded-lg overflow-hidden group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://tse2.mm.bing.net/th/id/OIP.r02tJ2e_0Jt95adIoRH_nAHaKj?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Poster film aksi futuristik dengan karakter utama menggunakan armor high-tech di tengah kota metropolis" class="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center">
+                             <a href='file:///C:/Users/USER/OneDrive/Documents/WEB/BAGIAN%20FILM%20CONJURING.htm'>
+                            <button class="bg-primary text-white p-4 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                <i class="fas fa-play text-xl"></i>
+                            </button>
+                        </a>
+                    </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-white font-semibold text-lg mb-2">the conjuring season 1-3</h3>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-yellow-400">★ 4.8</span>
+                            <span class="text-gray-400">2h 15m</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="genre-tag bg-gray-700 text-accent px-3 py-1 rounded-full text-sm">Aksi</span>
+                            <span class="genre-tag bg-gray-700 text-accent px-3 py-1 rounded-full text-sm">Horor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Movie Card 2 -->
+                <div class="movie-card bg-gray-800 rounded-lg overflow-hidden group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.oyqzajCsMxMNLh569D1bIQHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Poster film drama romantis dengan pasangan muda berdiri di bawah hujan di kota Paris" class="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center">
+                            <a href="file:///C:/Users/USER/OneDrive/Documents/WEB/web%20film%20spidermen.html#films">
+                            <button class="bg-primary text-white p-4 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                <i class="fas fa-play text-xl"></i>
+                            </button></a>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-white font-semibold text-lg mb-2">SPIDER-MAN 2002-2021</h3>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-yellow-400">★ 4.6</span>
+                            <span class="text-gray-400">1h 48m</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="genre-tag bg-gray-700 text-accent px-3 py-1 rounded-full text-sm">Aksi</span>
+                            <span class="genre-tag bg-gray-700 text-accent px-3 py-1 rounded-full text-sm">petualangan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Movie Card 3 -->
+                <div class="movie-card bg-gray-800 rounded-lg overflow-hidden group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5352f3d7-0e24-45dd-ada7-68e17c19ebfa.png" alt="Poster film horor dengan rumah tua berhantu dan siluet menyeramkan di jendela" class="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center">
+                            <button class="bg-primary text-white p-4 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                <i class="fas fa-play text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-white font-semibold text-lg mb-2">Rumah di Ujung Jalan</h3>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-yellow-400">★ 4.3</span>
+                            <span class="text-gray-400">1h 52m</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="genre-tag bg-gray-700 text-accent px-3 py-1 rounded-full text-sm">Horor</span>
+                            <span class="genre-tag bg-gray-700 text-accent px-3 py-1 rounded-full text-sm">Thriller</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Movie Card 4 -->
+                <div class="movie-card bg-gray-800 rounded-lg overflow-hidden group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3038506e-b5d1-4f12-8a91-c611aeb0a25f.png" alt="Poster film komedi dengan kelompok teman melakukan perjalanan road trip lucu melintasi Amerika" class="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center">
+                            <button class="bg-primary text-white p-4 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                <i class="fas fa-play text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-white font-semibold text-lg mb-2">Road Trip Gila</h3>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-yellow-400">★ 4.5</span>
+                            <span class="text-gray-400">1h 45m</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="genre-tag bg-gray-700 text-accent px-3 py-1 rounded-full text-sm">Komedi</span>
+                            <span class="genre-tag bg-gray-700 text-accent px-3 py-1 rounded-full text-sm">Petualangan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-20 bg-dark">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-white text-center mb-12">Jelajahi Berdasarkan Genre</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div class="category-card bg-secondary rounded-lg p-6 text-center cursor-pointer hover:bg-primary transition-colors group">
+                    <i class="fas fa-fist-raised text-4xl text-primary group-hover:text-white mb-4"></i>
+                    <h3 class="text-white font-semibold">Aksi</h3>
+                </div>
+                
+                <div class="category-card bg-secondary rounded-lg p-6 text-center cursor-pointer hover:bg-primary transition-colors group">
+                    <i class="fas fa-heart text-4xl text-pink-400 group-hover:text-white mb-4"></i>
+                    <h3 class="text-white font-semibold">Romantis</h3>
+                </div>
+                
+                <div class="category-card bg-secondary rounded-lg p-6 text-center cursor-pointer hover:bg-primary transition-colors group">
+                    <i class="fas fa-ghost text-4xl text-purple-400 group-hover:text-white mb-4"></i>
+                    <h3 class="text-white font-semibold">Horor</h3>
+                </div>
+                
+                <div class="category-card bg-secondary rounded-lg p-6 text-center cursor-pointer hover:bg-primary transition-colors group">
+                    <i class="fas fa-laugh-squint text-4xl text-yellow-400 group-hover:text-white mb-4"></i>
+                    <h3 class="text-white font-semibold">Komedi</h3>
+                </div>
+                
+                <div class="category-card bg-secondary rounded-lg p-6 text-center cursor-pointer hover:bg-primary transition-colors group">
+                    <i class="fas fa-rocket text-4xl text-blue-400 group-hover:text-white mb-4"></i>
+                    <h3 class="text-white font-semibold">Sci-Fi</h3>
+                </div>
+                
+                <div class="category-card bg-secondary rounded-lg p-6 text-center cursor-pointer hover:bg-primary transition-colors group">
+                    <i class="fas fa-dragon text-4xl text-green-400 group-hover:text-white mb-4"></i>
+                    <h3 class="text-white font-semibold">Fantasi</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Releases -->
+    <section class="py-20 bg-secondary">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-12">
+                <h2 class="text-3xl font-bold text-white">Rilis Terbaru</h2>
+                <a href="#" class="text-primary hover:underline">Lihat Semua →</a>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <!-- Repeat this block for each new release -->
+                <div class="group cursor-pointer">
+                    <div class="relative mb-3">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5d86c3fd-8d7d-4f55-bafb-242c98568c50.png" alt="Poster film drama perang dengan tentara di medan perang bersalju" class="w-full rounded-lg group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute top-2 right-2 bg-primary text-white px-2 py-1 rounded text-sm">
+                            BARU
+                        </div>
+                    </div>
+                    <h4 class="text-white font-semibold text-sm">Winter Soldier</h4>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="relative mb-3">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/96eb4d3a-354d-43c0-a95b-a4ab994598ca.png" alt="Poster film misteri dengan detektif memegang kaca pembesar di tempat kejahatan" class="w-full rounded-lg group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <h4 class="text-white font-semibold text-sm">Case Closed</h4>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="relative mb-3">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/aedda336-c079-42e4-9465-701dd977f633.png" alt="Poster film animasi keluarga dengan karakter kartun lucu dalam petualangan luar angkasa" class="w-full rounded-lg group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute top-2 right-2 bg-primary text-white px-2 py-1 rounded text-sm">
+                            BARU
+                        </div>
+                    </div>
+                    <h4 class="text-white font-semibold text-sm">Space Pals</h4>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="relative mb-3">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/73ce2946-949f-4712-bd57-289ec825c968.png" alt="Poster film dokumenter alam tentang kehidupan satwa liar di hutan hujan" class="w-full rounded-lg group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <h4 class="text-white font-semibold text-sm">Wild Kingdom</h4>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="relative mb-3">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d53ea4ca-28ef-44af-975a-557f2c2133b7.png" alt="Poster film musikal dengan penari di atas panggung Broadway yang cerah" class="w-full rounded-lg group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute top-2 right-2 bg-primary text-white px-2 py-1 rounded text-sm">
+                            BARU
+                        </div>
+                    </div>
+                    <h4 class="text-white font-semibold text-sm">Broadway Nights</h4>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="relative mb-3">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f11ed53b-0ba2-4723-8182-9747b34f9375.png" alt="Poster film thriller psikologis dengan wajah terdistorsi di cermin yang retak" class="w-full rounded-lg group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <h4 class="text-white font-semibold text-sm">Shattered Mind</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                            <i class="fas fa-film text-white text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-bold text-white">Cinemelati</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Platform streaming film terbaik dengan kualitas terjamin dan koleksi terlengkap.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Tautan Cepat</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Beranda</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Film</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Series</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Genre</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Daftar</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Kategori</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Aksi</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Romantis</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Komedi</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Horor</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Sci-Fi</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Dukungan</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Bantuan</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Kontak</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Syarat & Ketentuan</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8">
+                <p class="text-gray-400 text-center">
+                    © 2024 Cinemelati. All rights reserved. Made with ❤️ for movie lovers.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for interactive features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search functionality
+            const searchInput = document.querySelector('input[type="text"]');
+            searchInput.addEventListener('focus', function() {
+                this.parentElement.classList.add('ring-2', 'ring-primary');
+            });
+            
+            searchInput.addEventListener('blur', function() {
+                this.parentElement.classList.remove('ring-2', 'ring-primary');
+            });
+            
+            // Movie card hover effect for play button
+            const movieCards = document.querySelectorAll('.movie-card');
+            movieCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const playButton = this.querySelector('button');
+                    playButton.classList.remove('opacity-0', 'translate-y-4');
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const playButton = this.querySelector('button');
+                    playButton.classList.add('opacity-0', 'translate-y-4');
+                });
+            });
+            
+            // Category cards animation
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.querySelector('i').classList.add('scale-110');
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.querySelector('i').classList.remove('scale-110');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

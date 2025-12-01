@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spider-Man 2002 - Video Player</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            background: linear-gradient(135deg, #0c0c1d 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .spider-web {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.1;
+            background: 
+                linear-gradient(90deg, transparent 24px, #ff0000 24px, #ff0000 26px, transparent 26px),
+                linear-gradient(transparent 24px, #ff0000 24px, #ff0000 26px, transparent 26px);
+            background-size: 30px 30px;
+            z-index: -1;
+        }
+
+        .glow-effect {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,0,0,0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: pulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        .spider-logo {
+            animation: swing 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.7));
+        }
+
+        .video-container {
+            position: relative;
+            border: 3px solid #ff0000;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.3);
+            background: #000000;
+        }
+
+        .custom-controls {
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 20px;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #ff6b6b);
+            width: 45%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .control-buttons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #ff0000;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #ff0000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="range"] {
+            -webkit-appearance:none;
+            width: 100px;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #ff0000;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .movie-info {
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #ff0000;
+        }
+
+        .cast-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .cast-member {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .cast-member:hover {
+            transform: translateY(-5px);
+            background: rgba(255,0,0,0.2);
+        }
+
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid #ff0000;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="spider-web"></div>
+    <div class="glow-effect" style="top: 10%; left: 10%;"></div>
+    <div class="glow-effect" style="top: 70%; right: 15%;"></div>
+
+    <div class="min-h-screen flex flex-col items-center justify-center p-4">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="spider-logo mb-4">
+                <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+                    <path d="M50 20L60 40H40L50 20Z" fill="#ff0000"/>
+                    <path d="M50 80L40 60H60L50 80Z" fill="#ff0000"/>
+                    <circle cx="50" cy="50" r="15" fill="#ff0000"/>
+                    <path d="M20 50L40 40V60L20 50Z" fill="#ff0000"/>
+                    <path d="M80 50L60 60V40L80 50Z" fill="#ff0000"/>
+                </svg>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-2">
+                SPIDER-MAN
+            </h1>
+            <p class="text-xl text-red-400">2002 • Directed by Sam Raimi</p>
+        </div>
+
+        <!-- Video Player -->
+        <div class="w-full max-w-4xl mb-8">
+            <div class="video-container">
+                <div class="relative aspect-video flex items-center justify-center bg-black">
+                    <div class="spinner"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" class="opacity-20">
+                            <path d="M40 30L70 50L40 70V30Z" fill="#ff0000"/>
+                        </svg>
+                    </div>
+                    <video src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bf92f52f-893f-48b7-a7d8-12afdf4f2704.png" alt="Spider-Man 2002 movie poster featuring Tobey Maguire as Peter Parker in red and blue suit swinging between skyscrapers in New York City" class="w-full h-full object-cover opacity-30"/>
+                </video></div>
+                
+                <div class="custom-controls">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="control-buttons">
+                        <button class="btn" onclick="playPause()">▶️ Play</button>
+                        <div class="volume-control">
+                            <span>🔊</span>
+                            <input type="range" min="0" max="100" value="80">
+                        </div>
+                        <button class="btn ml-auto">⏩ 10s</button>
+                        <button class="btn">⏮️ 10s</button>
+                        <button class="btn">📋</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Movie Information -->
+        <div class="w-full max-w-4xl">
+            <div class="movie-info">
+                <h2 class="text-2xl font-bold text-red-400 mb-4">About the Movie</h2>
+                <p class="text-gray-300 mb-4">
+                    When bitten by a genetically modified spider, a nerdy, shy, and awkward high school student gains spider-like abilities 
+                    that he eventually must use to fight evil as a superhero after tragedy befalls his family.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div>
+                        <h3 class="text-red-400 font-semibold">Release Date</h3>
+                        <p class="text-white">May 3, 2002</p>
+                    </div>
+                    <div>
+                        <h3 class="text-red-400 font-semibold">Duration</h3>
+                        <p class="text-white">2h 1m</p>
+                    </div>
+                    <div>
+                        <h3 class="text-red-400 font-semibold">Rating</h3>
+                        <p class="text-white">PG-13</p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold text-red-400 mb-4">Main Cast</h3>
+                <div class="cast-grid">
+                    <div class="cast-member">
+                        <div class="w-16 h-16 bg-red-600 rounded-full mx-auto mb-2 flex items-center justify-center">
+                            <span class="text-white font-bold">TM</span>
+                        </div>
+                        <p class="font-semibold">Tobey Maguire</p>
+                        <p class="text-sm text-gray-400">Peter Parker</p>
+                    </div>
+                    <div class="cast-member">
+                        <div class="w-16 h-16 bg-blue-600 rounded-full mx-auto mb-2 flex items-center justify-center">
+                            <span class="text-white font-bold">KD</span>
+                        </div>
+                        <p class="font-semibold">Kirsten Dunst</p>
+                        <p class="text-sm text-gray-400">Mary Jane</p>
+                    </div>
+                    <div class="cast-member">
+                        <div class="w-16 h-16 bg-green-600 rounded-full mx-auto mb-2 flex items-center justify-center">
+                            <span class="text-white font-bold">WD</span>
+                        </div>
+                        <p class="font-semibold">Willem Dafoe</p>
+                        <p class="text-sm text-gray-400">Green Goblin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function playPause() {
+            const btn = document.querySelector('.btn');
+            if (btn.textContent.includes('Play')) {
+                btn.textContent = '⏸️ Pause';
+                document.querySelector('.spinner').style.display = 'none';
+                document.querySelector('.progress-fill').style.width = '75%';
+            } else {
+                btn.textContent = '▶️ Play';
+                document.querySelector('.spinner').style.display = 'block';
+            }
+        }
+
+        // Simulate loading
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.querySelector('.spinner').style.display = 'none';
+            }, 2000);
+        });
+
+        // Volume control
+        const volumeSlider = document.querySelector('input[type="range"]');
+        volumeSlider.addEventListener('input', function() {
+            const volume = this.value;
+            console.log('Volume set to:', volume + '%');
+        });
+    </script>
+</body>
+</html>
+
